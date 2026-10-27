@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Login | Student Expense Tracker</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app-container">
+
+    <header class="topbar">
+        <a class="brand" href="/">
+            <span class="brand-icon">₹</span>
+            <span>Expense<span class="brand-highlight">Track</span></span>
+        </a>
+        <span class="header-label">STUDENT FINANCE DASHBOARD</span>
+    </header>
+
+    <main class="login-main">
+        <section class="panel login-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">WELCOME BACK</p>
+                    <h2>Login to Your Account</h2>
+                </div>
+                <span class="form-icon budget-form-icon">₹</span>
+            </div>
+
+            <p class="panel-description">
+                Sign in to track expenses, manage your budget, and grow your savings.
+            </p>
+
+            LOGIN_MESSAGE
+
+            <form action="/login" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username"
+                       maxlength="50" placeholder="Enter your username"
+                       autocomplete="username" autofocus required>
+
+                <label for="password">Password</label>
+                <div class="password-wrap">
+                    <input type="password" id="password" name="password"
+                           maxlength="100" placeholder="Enter your password"
+                           autocomplete="current-password" required>
+                    <button type="button" class="toggle-password"
+                            id="toggle-password">Show</button>
+                </div>
+
+                <button class="button button-primary" type="submit">
+                    Login <span aria-hidden="true">→</span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Student Expense Tracker</p>
+        <span>Spend wisely. Save consistently.</span>
+    </footer>
+</div>
+
+<script>
+(() => {
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("toggle-password");
+
+    toggle.addEventListener("click", () => {
+        const hidden = password.type === "password";
+        password.type = hidden ? "text" : "password";
+        toggle.textContent = hidden ? "Hide" : "Show";
+    });
+})();
+</script>
+</body>
+</html>

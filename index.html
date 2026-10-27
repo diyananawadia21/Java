@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Student Expense Tracker</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app-container">
+
+    <header class="topbar">
+        <a class="brand" href="/">
+            <span class="brand-icon">₹</span>
+            <span>Expense<span class="brand-highlight">Track</span></span>
+        </a>
+        <div class="topbar-actions">
+            <span class="header-label">STUDENT FINANCE DASHBOARD</span>
+            <a class="logout-link" href="/logout">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <div>
+                <p class="eyebrow">YOUR MONEY, YOUR CONTROL</p>
+                <h1>Student Expense Tracker</h1>
+                <p class="welcome-text">
+                    Track expenses, manage your budget, and grow your savings.
+                </p>
+            </div>
+            <div class="today-chip">
+                <span class="status-dot"></span>
+                Personal Finance
+            </div>
+        </section>
+
+        <section class="summary-grid">
+            <article class="summary-card budget-card">
+                <div class="card-top">
+                    <span class="card-icon">₹</span>
+                    <span class="card-label">MONTHLY BUDGET</span>
+                </div>
+                <p class="summary-amount">₹BUDGET_AMOUNT</p>
+                <p class="card-description">Your planned monthly spending</p>
+            </article>
+
+            <article class="summary-card expense-card">
+                <div class="card-top">
+                    <span class="card-icon">↗</span>
+                    <span class="card-label">TOTAL EXPENSES</span>
+                </div>
+                <p class="summary-amount">₹TOTAL_AMOUNT</p>
+                <p class="card-description">Total expenses recorded</p>
+            </article>
+
+            <article class="summary-card remaining-card">
+                <div class="card-top">
+                    <span class="card-icon">✓</span>
+                    <span class="card-label">REMAINING BUDGET</span>
+                </div>
+                <p class="summary-amount">₹REMAINING_AMOUNT</p>
+                <p class="card-description">Budget minus total expenses</p>
+            </article>
+
+            <article class="summary-card savings-card">
+                <div class="card-top">
+                    <span class="card-icon">✦</span>
+                    <span class="card-label">TOTAL SAVINGS</span>
+                </div>
+                <p class="summary-amount" data-savings-total>₹SAVINGS_AMOUNT</p>
+                <p class="card-description">Your accumulated savings</p>
+            </article>
+        </section>
+
+        <section class="panel budget-overview">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">MONTHLY OVERVIEW</p>
+                    <h2>Budget Overview</h2>
+                </div>
+                <span class="overview-badge">Spending progress</span>
+            </div>
+
+            <div class="progress-details">
+                <span>Budget used</span>
+                <strong>PERCENT_USED%</strong>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" style="width: PROGRESS_WIDTH%;"></div>
+            </div>
+
+            <p class="budget-message">BUDGET_MESSAGE</p>
+        </section>
+
+        <section class="forms-grid">
+            <article class="panel form-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">PLAN AHEAD</p>
+                        <h2>Set Monthly Budget</h2>
+                    </div>
+                    <span class="form-icon budget-form-icon">₹</span>
+                </div>
+
+                <p class="panel-description">
+                    Set the amount you plan to spend this month.
+                </p>
+
+                <form action="/setBudget" method="post">
+                    <label for="budget">Monthly Budget (₹)</label>
+                    <input type="number" id="budget" name="budget"
+                           min="0" step="0.01"
+                           placeholder="Enter monthly budget" required>
+
+                    <button class="button button-primary" type="submit">
+                        Save Monthly Budget
+                    </button>
+                </form>
+            </article>
+
+            <article class="panel form-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">RECORD SPENDING</p>
+                        <h2>Add New Expense</h2>
+                    </div>
+                    <span class="form-icon expense-form-icon">＋</span>
+                </div>
+
+                <p class="panel-description">
+                    Record purchases and organise your spending.
+                </p>
+
+                <form action="/addExpense" method="post">
+                    <label for="description">Expense Description</label>
+                    <input type="text" id="description" name="description"
+                           maxlength="100" placeholder="e.g. College lunch" required>
+
+                    <label for="category">Expense Category</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Education">Education</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label for="expense-amount">Amount (₹)</label>
+                    <input type="number" id="expense-amount" name="amount"
+                           min="0.01" step="0.01"
+                           placeholder="Enter expense amount" required>
+
+                    <button class="button button-primary" type="submit">
+                        Add Expense
+                    </button>
+                </form>
+            </article>
+        </section>
+
+        <section class="panel saving-panel">
+            <div class="saving-panel-heading">
+                <div class="saving-heading-content">
+                    <span class="saving-heading-icon">✦</span>
+                    <div>
+                        <p class="eyebrow">BUILD YOUR FUTURE</p>
+                        <h2>Manage Your Savings</h2>
+                        <p class="panel-description">
+                            Add savings deposits and watch your total grow.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="saving-total-box">
+                    <span>Total Saved</span>
+                    <strong data-savings-total>₹SAVINGS_AMOUNT</strong>
+                </div>
+            </div>
+
+            <div class="saving-form-container">
+                <form id="saving-form" action="/addSaving" method="post">
+                    <div class="saving-input-group">
+                        <label for="saving-amount">Savings Amount (₹)</label>
+                        <input type="number" id="saving-amount" name="amount"
+                               min="0.01" step="0.01"
+                               placeholder="Enter savings amount" required>
+                    </div>
+
+                    <button type="submit" id="saving-submit"
+                            class="button saving-button">
+                        Save Savings <span aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <p class="form-footnote">
+                    Each deposit is automatically recorded as “Savings deposit”.
+                </p>
+                <p id="saving-status" class="saving-status" role="status"
+                   aria-live="polite"></p>
+            </div>
+        </section>
+
+        <section class="panel table-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR TRANSACTIONS</p>
+                    <h2>Expense History</h2>
+                </div>
+                <span class="table-count">All recorded expenses</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th class="align-right">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        EXPENSE_ROWS
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel table-panel savings-history-panel">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR PROGRESS</p>
+                    <h2>Savings History</h2>
+                </div>
+                <span class="table-count savings-count">All savings deposits</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th class="align-right">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="savings-body">
+                        SAVINGS_ROWS
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Student Expense Tracker</p>
+        <span>Spend wisely. Save consistently.</span>
+    </footer>
+</div>
+
+<script>
+(() => {
+    const form = document.getElementById("saving-form");
+    const amountInput = document.getElementById("saving-amount");
+    const submitButton = document.getElementById("saving-submit");
+    const status = document.getElementById("saving-status");
+    const savingsBody = document.getElementById("savings-body");
+    const totalElements = document.querySelectorAll("[data-savings-total]");
+
+    function formatMoney(value) {
+        return Number(value).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    function addHistoryRow(date, description, amount) {
+        const emptyCell = savingsBody.querySelector(".empty-state");
+        if (emptyCell) {
+            savingsBody.replaceChildren();
+        }
+
+        const row = document.createElement("tr");
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = date;
+
+        const descriptionCell = document.createElement("td");
+        descriptionCell.textContent = description;
+
+        const amountCell = document.createElement("td");
+        amountCell.className = "money-cell savings-money";
+        amountCell.textContent = "₹" + formatMoney(amount);
+
+        row.append(dateCell, descriptionCell, amountCell);
+        savingsBody.prepend(row);
+    }
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const amount = Number(amountInput.value);
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+            status.textContent = "Enter an amount greater than zero.";
+            status.className = "saving-status error";
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Saving...";
+        status.textContent = "";
+
+        try {
+            const response = await fetch("/addSaving", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+                    "Accept": "application/json"
+                },
+                body: new URLSearchParams({ amount: amountInput.value })
+            });
+
+            if (!response.ok) {
+                const message = await response.text();
+                throw new Error(message || "The savings amount could not be saved.");
+            }
+
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error("The savings amount could not be saved.");
+            }
+
+            totalElements.forEach((element) => {
+                element.textContent = "₹" + formatMoney(result.total);
+            });
+
+            addHistoryRow(result.date, result.description, result.amount);
+
+            amountInput.value = "";
+            status.textContent = "Savings saved successfully!";
+            status.className = "saving-status success";
+
+        } catch (error) {
+            status.textContent = error.message ||
+                "Could not save savings. Check that the Java server is running.";
+            status.className = "saving-status error";
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Save Savings <span aria-hidden="true">→</span>';
+        }
+    });
+})();
+</script>
+</body>
+</html>
